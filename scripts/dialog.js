@@ -15,7 +15,8 @@ function initDialog() {
 
     // Добавляем обработчики на все кнопки сохранения
     document.querySelectorAll('.card__save-button').forEach((button) => {
-        button.addEventListener('click', () => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
             if (dialog) {
                 dialog.showModal();
             }
@@ -24,7 +25,8 @@ function initDialog() {
 
     // Обработчик для кнопки закрытия диалога
     if (dialogButton) {
-        dialogButton.addEventListener('click', () => {
+        dialogButton.addEventListener('click', (e) => {
+            e.preventDefault();
             dialog.close();
         });
     }
