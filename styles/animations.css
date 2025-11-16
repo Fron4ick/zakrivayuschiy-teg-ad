@@ -12,108 +12,112 @@
 
 /* Keyframes для масштабирования сердца */
 @keyframes heart-scale {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.25);
-  }
-  100% {
-    transform: scale(1);
-  }
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.25);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 /* Keyframes для искр */
 @keyframes sparks {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }
 
 /* Базовые стили для иконки сердца */
 .like-icon {
-  width: 2.4375rem;
-  height: 2.25rem;
+    width: 2.4375rem;
+    height: 2.25rem;
 }
 
 .like-icon .core,
 .like-icon .main-body {
-  fill: none;
-  transition: fill 0.3s;
+    fill: none;
+    transition: fill 0.3s;
 }
 
 .like-icon .contour {
-  fill: var(--contour-color);
-  transition: fill 0.1s linear;
+    fill: var(--contour-color);
+    transition: fill 0.1s linear;
 }
 
 .like-icon .sparks {
-  opacity: 0;
+    opacity: 0;
 }
 
 /* Hover состояние */
 .like-icon:hover .core {
-  fill: var(--contour-color);
-  transition: fill 0.3s 0.03s;
+    fill: var(--contour-color);
+    transition: fill 0.3s 0.03s;
 }
 
 .like-icon:hover .main-body {
-  fill: var(--contour-color);
-  transition: fill 0.3s 0.05s;
+    fill: var(--contour-color);
+    transition: fill 0.3s 0.05s;
 }
 
 .like-icon:not(:hover) .core {
-  transition: fill 0.3s 0.03s;
+    transition: fill 0.3s 0.03s;
 }
 
 .like-icon:not(:hover) .main-body {
-  transition: fill 0.3s;
+    transition: fill 0.3s;
 }
 
 /* Active состояние */
 .like-icon:active .core {
-  fill: var(--animation-fill-color);
-  transition: fill 0.3s 0.05s;
+    fill: var(--animation-fill-color);
+    transition: fill 0.3s 0.05s;
 }
 
 .like-icon:active .main-body {
-  fill: var(--animation-fill-color);
-  transition: fill 0.3s 0.05s;
+    fill: var(--animation-fill-color);
+    transition: fill 0.3s 0.05s;
 }
 
 /* Click состояние (is-liked) */
 .like-icon.is-liked .core {
-  fill: var(--animation-fill-color);
-  transition: fill 0.3s 0.05s;
+    fill: var(--animation-fill-color);
+    transition: fill 0.3s 0.05s;
 }
 
 .like-icon.is-liked .main-body {
-  fill: var(--animation-fill-color);
-  transition: fill 0.3s 0.05s;
+    fill: var(--animation-fill-color);
+    transition: fill 0.3s 0.05s;
 }
 
 .like-icon.is-liked .contour {
-  fill: var(--animation-fill-color);
-  transition: fill 0.3s 0.06s;
+    fill: var(--animation-fill-color);
+    transition: fill 0.3s 0.06s;
 }
 
 .like-icon.is-liked .heart {
-  animation: heart-scale 0.3s 0.1s ease-in;
-  transform-origin: center;
+    animation: heart-scale 0.3s 0.1s ease-in;
+    transform-origin: center;
 }
 
 .like-icon.is-liked .sparks {
-  animation: sparks 0.3s 0.3s ease-in;
+    animation: sparks 0.3s 0.3s ease-in;
 }
 
 /* Возврат контура при снятии лайка */
 .like-icon:not(.is-liked) .contour {
-  fill: var(--contour-color);
-  transition: fill 0.1s linear;
+    fill: var(--contour-color);
+    transition: fill 0.1s linear;
 }

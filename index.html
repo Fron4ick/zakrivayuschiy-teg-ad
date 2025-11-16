@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./styles/globals.css" />
     <link rel="stylesheet" href="./styles/style.css" />
     <link rel="stylesheet" href="./styles/animations.css" />
+    <link rel="icon" href="./images/favicon.png" type="image/x-icon">
 </head>
 
 <body class="page">
@@ -21,31 +22,20 @@
         <section class="cards">
             <!-- Карточки генерируются из массива данных в scripts/cards.js -->
         </section>
+
+        <button class="card__save-button" type="button">
+            <img src="./svg/saveicon.svg" class="img_saveicon"></img>
+            <span class="button__text">Сохранить на память</span>
+        </button>
     </main>
-
-    <!-- SVG Symbol для дискеты -->
-    <svg style="display: none;">
-        <symbol id="floppy-icon" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 3V0H33V3H36V6H39V39H0V3H3V36H6V21H33V36H30V24H9V36H36V6H33V3H30V15H6V3H9V12H21V3H24V12H27V3Z"
-                fill="currentColor" />
-        </symbol>
-    </svg>
-
-    <button class="card__save-button" type="button">
-        <svg class="save-icon" width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <use href="#floppy-icon"></use>
-        </svg>
-        <span class="button__text">Сохранить на память</span>
-      </button>    
 
     <!-- Dialog -->
     <dialog class="dialog" id="dialog">
         <div class="dialog__content">
-            <svg class="dialog__icon" width="39" height="39" viewBox="0 0 39 39" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <use href="#floppy-icon"></use>
-            </svg>
-            <p class="dialog__text">Файл сохранён!</p>
+            <div class="info_save">
+                <img src="./svg/saveicon.svg" class="img_saveicon_dialog"></img>
+                <p class="dialog__text">Вставьте дискету, чтобы продолжить</p>
+            </div>
             <button class="dialog__button" type="button">ОК</button>
         </div>
     </dialog>
