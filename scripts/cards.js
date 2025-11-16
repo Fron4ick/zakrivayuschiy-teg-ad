@@ -117,15 +117,14 @@ function renderCards() {
         cardsContainer.insertAdjacentHTML('beforeend', cardHTML);
     });
 
-    // После генерации карточек инициализируем обработчики лайков и диалога
+    // После генерации карточек инициализируем обработчики лайков
     // Используем setTimeout для гарантии, что DOM обновлен
     setTimeout(() => {
         if (typeof initLikeButtons === 'function') {
             initLikeButtons();
         }
-        if (typeof initDialog === 'function') {
-            initDialog();
-        }
+        // initDialog уже инициализирован при загрузке и использует делегирование,
+        // поэтому дополнительный вызов не нужен
     }, 0);
 }
 
