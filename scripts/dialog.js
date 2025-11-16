@@ -1,47 +1,37 @@
+// Флаг для отслеживания инициализации
+let dialogInitialized = false;
+
 // Функция для инициализации обработчиков диалога
 function initDialog() {
     const dialog = document.getElementById('dialog');
-    const saveButtons = document.querySelectorAll('.card__save-button');
-    const dialogButton = document.querySelector('.dialog__button');
+    if (!dialog || dialogInitialized) return;
 
-    if (!dialog) return;
+    dialogInitialized = true;
 
-    // Удаляем старые обработчики, если они были
-    saveButtons.forEach((button) => {
-        // Клонируем кнопку, чтобы удалить все обработчики
-        const newButton = button.cloneNode(true);
-        button.parentNode.replaceChild(newButton, button);
-    });
-
-    // Добавляем обработчики на все кнопки сохранения
-    document.querySelectorAll('.card__save-button').forEach((button) => {
-        button.addEventListener('click', (e) => {
+    // Используем делегирование событий для всех кнопок сохранения
+    document.addEventListener('click', (e) => {
+        // Обработка кнопок "Сохранить на память"
+        if (e.target.closest('.card__save-button')) {
             e.preventDefault();
-            if (dialog) {
-                dialog.showModal();
-            }
-        });
-    });
+            e.stopPropagation();
+            dialog.showModal();
+            return false;
+        }
 
-    // Обработчик для кнопки закрытия диалога
-    if (dialogButton) {
-        dialogButton.addEventListener('click', (e) => {
+        // Обработка кнопки "ОК" в диалоге
+        if (e.target.closest('.dialog__button')) {
             e.preventDefault();
+            e.stopPropagation();
             dialog.close();
-        });
-    }
+            return false;
+        }
+    });
 }
 
-// Инициализируем при загрузке, если карточки уже есть
+// Инициализируем при загрузке DOM
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        // Если карточки генерируются динамически, initDialog будет вызван из cards.js
-        // Иначе инициализируем здесь
-        setTimeout(() => {
-            if (document.querySelectorAll('.card__save-button').length > 0) {
-                initDialog();
-            }
-        }, 100);
-    });
+    document.addEventListener('DOMContentLoaded', initDialog);
+} else {
+    initDialog();
 }
 
