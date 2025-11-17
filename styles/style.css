@@ -309,7 +309,7 @@
 }
 
 .card__save-button .save-icon,
-.card__save-button .button__text  {
+.card__save-button .button__text {
     position: relative;
     z-index: 1;
     mix-blend-mode: difference;
