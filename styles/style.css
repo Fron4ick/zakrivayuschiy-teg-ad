@@ -308,14 +308,8 @@
     box-shadow: 2px 2px 0 var(--accent-color);
 }
 
-.card__save-button .save-icon {
-    position: relative;
-    z-index: 1;
-    mix-blend-mode: difference;
-    color: var(--bg-color);
-}
-
-.card__save-button .button__text {
+.card__save-button .save-icon,
+.card__save-button .button__text  {
     position: relative;
     z-index: 1;
     mix-blend-mode: difference;
@@ -416,6 +410,7 @@
 
 .img_saveicon {
     width: 10%;
+    fill: var(--bg-color);
 }
 
 .img_saveicon_dialog {
@@ -426,6 +421,7 @@
     display: flex;
     gap: 20px;
 }
+
 
 /* Фильтры для изображений */
 
