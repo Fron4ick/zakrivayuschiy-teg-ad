@@ -1,195 +1,123 @@
-/* Анимация кнопки лайк с наслоением SVG изображений */
+/* Опишите в этом файле все keyframes для проекта и стили анимаций иконки Like.
 
-/* Базовая иконка лайка */
-.like-icon {
-    display: block;
-    width: 39px;
-    height: 36px;
-    position: relative;
-    background-image: url('../svg/like_empty.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    transition: none;
-}
+Будьте внимательны! Для корректной работы скриптов на этом сайте нужно, чтобы в HTML некоторые классы были названы особым образом:
+✦ like-icon — для svg-иконки анимированного сердца
+✦ card__like-button — для кнопки Like рядом с иконкой
+✦ card__icon-button — для кнопки, оборачивающей иконку
+✦ card__icon-button — для кнопки, оборачивающей иконку
+✦ is-liked — для обозначения состояния лайкнутой иконки в виде сердца
+✦ button__text — для обозначения текстового элемента внутри кнопки
 
-/* Псевдоэлементы для наслоения изображений */
-.like-icon::before,
-.like-icon::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0s;
-}
+*/
 
-/* Состояние: NOT LIKED */
-
-/* Hover: 0-0.5s показываем cross_dark */
-.like-icon:not(.is-liked):hover::before {
-    background-image: url('../svg/cross_dark.svg');
-    opacity: 1;
-    animation: hover-first-stage 0.5s forwards;
-}
-
-@keyframes hover-first-stage {
-    0% { opacity: 1; }
-    99.99% { opacity: 1; }
-    100% { opacity: 0; }
-}
-
-/* Hover: >0.5s показываем like_final_dark */
-.like-icon:not(.is-liked):hover::after {
-    background-image: url('../svg/like_final_dark.svg');
-    opacity: 0;
-    animation: hover-second-stage 0.5s 0.5s forwards;
-}
-
-@keyframes hover-second-stage {
-    0% { opacity: 0; }
-    1% { opacity: 1; }
-    100% { opacity: 1; }
-}
-
-/* Active (mousedown): 0-0.5s показываем cross_red */
-.like-icon:not(.is-liked):active::before {
-    background-image: url('../svg/cross_red.svg');
-    opacity: 1;
-    animation: active-first-stage 0.5s forwards;
-}
-
-@keyframes active-first-stage {
-    0% { opacity: 1; }
-    99.99% { opacity: 1; }
-    100% { opacity: 0; }
-}
-
-/* Active (mousedown): >0.5s показываем like_final_red с обводкой like_empty */
-.like-icon:not(.is-liked):active::after {
-    background-image: url('../svg/like_final_red.svg'), url('../svg/like_empty.svg');
-    opacity: 0;
-    animation: active-second-stage 0.5s 0.5s forwards;
-}
-
-@keyframes active-second-stage {
-    0% { opacity: 0; }
-    1% { opacity: 1; }
-    100% { opacity: 1; }
-}
-
-/* Click анимация через класс */
-.like-icon.clicking::before {
-    animation: click-animation-before 2s forwards;
-}
-
-.like-icon.clicking::after {
-    animation: click-animation-after 2s forwards;
-}
-
-/* Анимация клика - слой ::before */
-@keyframes click-animation-before {
-    /* 0-0.5s: cross_red */
+/* Keyframes для масштабирования сердца */
+@keyframes heart-scale {
     0% {
-        background-image: url('../svg/cross_red.svg');
-        opacity: 1;
+        transform: scale(1);
     }
-    24.99% {
-        background-image: url('../svg/cross_red.svg');
-        opacity: 1;
-    }
-    /* 0.5-1.0s: like_final_red */
-    25% {
-        background-image: url('../svg/like_final_red.svg');
-        opacity: 1;
-    }
-    49.99% {
-        background-image: url('../svg/like_final_red.svg');
-        opacity: 1;
-    }
-    /* 1.0-1.5s: like_big */
+
     50% {
-        background-image: url('../svg/like_big.svg');
+        transform: scale(1.25);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Keyframes для искр */
+@keyframes sparks {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
         opacity: 1;
     }
-    74.99% {
-        background-image: url('../svg/like_big.svg');
-        opacity: 1;
-    }
-    /* 1.5-2.0s: like_bomb */
-    75% {
-        background-image: url('../svg/like_bomb.svg');
-        opacity: 1;
-    }
-    99.99% {
-        background-image: url('../svg/like_bomb.svg');
-        opacity: 1;
-    }
-    /* >2.0s: скрываем */
+
     100% {
         opacity: 0;
     }
 }
 
-@keyframes click-animation-after {
-    0%, 100% {
-        opacity: 0;
-    }
+/* Базовые стили для иконки сердца */
+.like-icon {
+    width: 2.4375rem;
+    height: 2.25rem;
 }
 
-/* Состояние: LIKED */
-.like-icon.is-liked {
-    background-image: url('../svg/like_final_red.svg');
+.like-icon .core,
+.like-icon .main-body {
+    fill: none;
+    transition: fill 0.3s;
 }
 
-.like-icon.is-liked::before,
-.like-icon.is-liked::after {
+.like-icon .contour {
+    fill: var(--contour-color);
+    transition: fill 0.1s linear;
+}
+
+.like-icon .sparks {
     opacity: 0;
 }
 
-/* Сброс при mousedown на лайкнутой кнопке */
-.like-icon.is-liked:active {
-    background-image: url('../svg/like_empty.svg');
+/* Hover состояние */
+.like-icon:hover .core {
+    fill: var(--contour-color);
+    transition: fill 0.3s 0.03s;
 }
 
-.like-icon.is-liked:active::before,
-.like-icon.is-liked:active::after {
-    opacity: 0;
-    animation: none;
+.like-icon:hover .main-body {
+    fill: var(--contour-color);
+    transition: fill 0.3s 0.05s;
 }
 
-/* Убираем эффекты при unhover */
-.like-icon:not(:hover)::before,
-.like-icon:not(:hover)::after {
-    animation: none;
-    opacity: 0;
-    transition: opacity 0.1s;
+.like-icon:not(:hover) .core {
+    transition: fill 0.3s 0.03s;
 }
 
-/* Стили для кнопки */
-.card__icon-button {
-    background: transparent;
-    border: 2px solid transparent;
-    padding: 0;
-    cursor: pointer;
-    height: 38px;
-    width: 39px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: border-color 0.3s ease;
+.like-icon:not(:hover) .main-body {
+    transition: fill 0.3s;
 }
 
-.card__icon-button:focus {
-    outline: none;
+/* Active состояние */
+.like-icon:active .core {
+    fill: var(--animation-fill-color);
+    transition: fill 0.3s 0.05s;
 }
 
-.card__icon-button:focus-visible {
-    border-color: var(--accent-color);
+.like-icon:active .main-body {
+    fill: var(--animation-fill-color);
+    transition: fill 0.3s 0.05s;
+}
+
+/* Click состояние (is-liked) */
+.like-icon.is-liked .core {
+    fill: var(--animation-fill-color);
+    transition: fill 0.3s 0.05s;
+}
+
+.like-icon.is-liked .main-body {
+    fill: var(--animation-fill-color);
+    transition: fill 0.3s 0.05s;
+}
+
+.like-icon.is-liked .contour {
+    fill: var(--animation-fill-color);
+    transition: fill 0.3s 0.06s;
+}
+
+.like-icon.is-liked .heart {
+    animation: heart-scale 0.3s 0.1s ease-in;
+    transform-origin: center;
+}
+
+.like-icon.is-liked .sparks {
+    animation: sparks 0.3s 0.3s ease-in;
+}
+
+/* Возврат контура при снятии лайка */
+.like-icon:not(.is-liked) .contour {
+    fill: var(--contour-color);
+    transition: fill 0.1s linear;
 }
