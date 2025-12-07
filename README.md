@@ -1,1 +1,1 @@
-https://zakrivayuschiy-teg-ad.vercel.app/
+https://github.com/Fron4ick/zakrivayuschiy-teg-ad
